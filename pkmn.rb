@@ -156,7 +156,7 @@ module PKMN
 		attr_accessor :condition # The optional expression that must evaluate to true before effect is applied - Proc
 		attr_accessor :effect # The effect the ability has - Proc
 
-		def initialize(:id)
+		def initialize(id)
 			
 		end
 
