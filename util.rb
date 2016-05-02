@@ -10,7 +10,7 @@ module PKMN::Util
 			include Callback
 
 			def activate
-				System.registerCallback(:battle, self)
+				System.registerCallback(:battle, self, phase)
 			end
 			
 		end

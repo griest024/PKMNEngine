@@ -1,5 +1,4 @@
 
-# A catalog of possible effects that a move can have, defined here so as to be resusable
 module PKMN
 
 	class Move
@@ -32,22 +31,4 @@ module PKMN
 			
 		end
 	end
-
-	module Move
-
-		module Effect
-
-			# 002 
-			def hurtUserQuarter(user)
-				user.reduceHPPercent(25)
-			end
-
-			def poison(target)
-				target
-			end
-
-
-		end
-	end
-
 end

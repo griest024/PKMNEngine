@@ -2,8 +2,6 @@ module PKMN
 
 	class Game
 
-		STATUS_DAMAGE_STEPS = 5
-
 		attr_accessor :name # The name of the game - String
 		attr_accessor :regions # The regions in the game - Hash(id: Region)
 		attr_accessor :species # All the species available - Hash(id: Species)
@@ -88,21 +86,6 @@ module PKMN
 	class EncounterList
 		attr_accessor :id # The symbol by which the encounters are referred to internally - Symbol
 
-	end
-
-	
-
-	class Battle
-
-		attr_accessor :participants
-		attr_accessor :pokemon
-		attr_accessor :weather
-
-		def initialize(args)
-			
-		end
-		
-		
 	end
 
 	# In battle conditional effect that every pokemon has

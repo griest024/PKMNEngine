@@ -21,12 +21,6 @@ module PKMN
 		include Util::Callback::Overworld
 	end
 
-	module Status
-
-
-		
-	end
-
 	class Status
 
 		attr_accessor :pokemon
@@ -99,7 +93,7 @@ module PKMN
 		def applyEffect(ef)
 			ef.pokemon= self
 			effects << ef if !effects.include?(ef)
-			ef.activate
+			ef.activate # activating here ensures that effect doesn't start until it has a pokemon
 		end
 
 		def setStatus(st)
@@ -120,7 +114,7 @@ module PKMN
 		end
 
 		def reduceHPPercent(percent)
-			hp= hp * (percent / 100)
+			hp= stats[:hp] * (percent / 100)
 		end
 
 		private :id=

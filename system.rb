@@ -2,12 +2,12 @@ module System
 
 	class System
 
-		@@battle_callbacks = []
+		@@battle_callbacks = {}
 		@@overworld_callbacks = []
 		
-		def self.registerCallback(type, obj)
+		def self.registerCallback(type, obj, battle_phase = nil)
 			if type == :battle
-				@@battle_callbacks << obj
+				@@battle_callbacks[obj] = battle_phase
 			elsif type == :overworld
 				@@overworld_callbacks << obj
 			else
