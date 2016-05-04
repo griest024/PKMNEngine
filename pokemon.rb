@@ -44,7 +44,7 @@ module PKMN
 		attr_accessor :battle_sprite # The appearance of the pokemon in battle
 		attr_accessor :name # The name of the species displayed ingame - String
 		attr_accessor :evolutions # The possible evolutions of this species - Hash(evo_type.id: Species)
-		attr_accessor :level_moves # The moves the species learns by leveling up - Array(Move)
+		attr_accessor :moveset # The moves the species learns by leveling up - Array(Move)
 		attr_accessor :tm_moves # The moves the species learns by TM - Array(ToF)
 		attr_accessor :hm_moves # The moves the species learns by HM - Array(ToF)
 		attr_accessor :description # A description of the species (displayed by pokedex) - String
@@ -52,6 +52,23 @@ module PKMN
 		attr_accessor :habitat # The regions and maps this species can be found - Hash(Region.id: Array(Map))
 		attr_accessor :xp_level # The total xp required to reach each level - Array(Number)
 		attr_accessor :abilities # The abilities that this species can have - Array(Ability)
+		attr_accessor :xp_yield
+		attr_accessor :ev_yield
+		attr_accessor :catch_rate
+		attr_accessor :happiness
+		attr_accessor :hatch_steps
+		attr_accessor :egg_groups
+		attr_accessor :height
+		attr_accessor :weight
+		attr_accessor :color
+		attr_accessor :kind
+		attr_accessor :abilities
+		attr_accessor :hidden_abilities
+		attr_accessor :egg_moves
+		attr_accessor :habitat
+		attr_accessor :region
+		attr_accessor :type1
+		attr_accessor :type2
 	end
 
 	class Pokemon
@@ -72,6 +89,7 @@ module PKMN
 		attr_accessor :owner # The current owner of the pokemon - Player
 		attr_accessor :status # The current status of the pokemon - Pokemon::Status
 		attr_accessor :effects # All the current effects being applied to this pokemon - Array[Effect]
+		attr_accessor :happiness
 
 		def initialize(species, level = 1)
 			typeCheck(species => Species, level => Number)
