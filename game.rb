@@ -24,38 +24,6 @@ module PKMN
 
 	end
 
-	class Item
-
-
-		def initialize(args)
-			
-		end
-		
-		
-	end
-
-	class Bag
-
-		attr_accessor :items
-		attr_accessor :categories
-
-
-		def initialize(*items)
-			
-		end
-
-		def addItems(*items)
-			args = {}
-			items.each { |e| args[e] = Item }
-		end
-
-		def add(item)
-			addItems(item)
-		end
-		
-		
-	end
-
 	# Represents the player. This class is slightly bloated so as to allow an instance to
 	# function as a save. ***Consider changing this***
 	class Player
