@@ -1,6 +1,6 @@
 module System
 
-	class System
+	class System < JavaFX::Application
 
 		@@battle_callbacks = {}
 		@@overworld_callbacks = []
