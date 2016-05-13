@@ -8,21 +8,25 @@ module PKMN::Util
 		# system_event - the optional system event this callback will listen for
 		# call_method - a block to define a custom callback method
 		def self.new(name, system_event = nil, &callback_method)
+			name = name.to_sym
 			mod = Module.new do
 				@receivers = []
-				call_method = lambda { raise NotImplementedError.new("You must override call") } if !call_method
+				call_method = lambda { raise NotImplementedError.new("You must override callback") } if !call_method
 				define_method(:callback, callback_method)
 				def self.trigger
-					receivers.each { |e| e.call }
+					receivers.each { |e| e.callback }
+				end
+				def self.included(klass)
+					klass.class_variable_set(:callback_module, self)
 				end
 				def self.addReceiver(receiver)
 					@receivers << receiver
 				end
 				def activate
-					self.addReceiver(self)
+					@@callback_module.addReceiver(self)
 				end
 			end
-			const_set(name.to_sym, mod)
+			const_set(name, mod)
 		end
 		
 	end
