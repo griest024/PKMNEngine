@@ -5,7 +5,7 @@ module PKMN
 		attr_accessor :name # The name of the game - String
 		attr_accessor :regions # The regions in the game - Hash(id: Region)
 		attr_accessor :species # All the species available - Hash(id: Species)
-		attr_accessor :evo_types # All the evolution types available - Hash(id: EvolutionType)
+		attr_accessor :evolutions # All the evolution types available - Hash(id: EvolutionType)
 		attr_accessor :items # All the items available - Hash(id: Item)
 		attr_accessor :trainers # Contains all trainers and gym leaders - Hash(id: Trainer)
 		attr_accessor :types # The pokemon types used in the game - Hash(id: Type)
@@ -22,6 +22,33 @@ module PKMN
 		attr_accessor :player # The current (loaded) player - Player
 		attr_accessor :statuses
 
+	end
+
+	class TypeChart
+
+		def initialize(relationships)
+			$game.types.each do |type| 
+				var = instance_variable_set("@#{type}".to_sym, {})
+				var.default= :normal
+				$game.types.each { |e| var[e] = relationships.dig(type, e) if relationships.has_key?(type) && relationships[type].has_key?(e) }
+			end
+		end
+
+		def defineEffectiveness(attacker_type, defender_type, effectiveness)
+			instance_variable_set("@#{attacker_type}".to_sym, {defender_type => effectiveness})
+		end
+
+		def add(attacker_type, defender_type, effectiveness)
+			defineEffectiveness(attacker_type, defender_type, effectiveness)
+		end
+
+		def getEffectiveness(attacker_type, defender_type)
+			instance_variable_get("@#{attacker_type}".to_sym)[defender_type]
+		end
+
+		def get(attacker_type, defender_type)
+			getEffectiveness(attacker_type, defender_type)
+		end
 	end
 
 	# Represents the player. This class is slightly bloated so as to allow an instance to

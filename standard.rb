@@ -2,6 +2,7 @@ module PKMN
 
 	class Game
 
+		MOVE_MULTIPLIERS = {no_effect: 0, not_effective: .5, normal: 1, super_effective: 2}
 		STATUS_DAMAGE_STEPS = 5
 		POISON_PERCENT_DAMAGE = 1
 		BURN_PERCENT_DAMAGE = 2
