@@ -13,13 +13,13 @@ module PKMN
 		attr_accessor :description # Description of the move - String
 		attr_accessor :pokemon # The pokemon this move belongs to - Pokemon
 
-		def initialize(move_name, move_type, move_category, move_max_pp, move_power, move_accuracy)
-			name= move_name
-			type= move_type
-			category= move_category
-			max_pp= move_max_pp
-			power= move_power
-			accuracy= move_accuracy
+		def initialize(name, type, category, max_pp, power, accuracy)
+			@name = name
+			@type = type
+			@category = category
+			@max_pp = max_pp
+			@power = power
+			@accuracy = accuracy
 		end
 
 		def call(target, user, battle)

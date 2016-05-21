@@ -63,9 +63,9 @@ module PKMN
 
 
 		def initialize(name)
-			name= name
-			bag= Bag.new
-			pokedex= Pokedex.new
+			@name = name
+			@bag = Bag.new
+			@pokedex = Pokedex.new
 		end
 		
 		

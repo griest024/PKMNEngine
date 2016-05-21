@@ -14,7 +14,7 @@ module PKMN::Util
 				call_method = lambda { raise NotImplementedError.new("You must override ##{name}") } if !call_method
 				define_method(name, callback_method)
 				def self.trigger
-					receivers.each { |e| e.callback }
+					@receivers.each { |e| e.callback }
 				end
 				def self.included(klass)
 					klass.class_variable_set("@@#{name}_callback_module".to_sym, self)
@@ -33,7 +33,7 @@ module PKMN::Util
 				end
 			end
 			const_set(name, mod)
-			@callbacks[name] = mod
+			self.callbacks[name] = mod
 			mod
 		end
 

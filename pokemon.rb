@@ -94,33 +94,33 @@ module PKMN
 		def initialize(species, level = 1)
 			typeCheck(species => Species, level => Number)
 			rng = Random.new
-			name= species.name
-			xp= species.xp_level[level]
-			evs= {}
+			@name = species.name
+			@xp = species.xp_level[level]
+			@evs = {}
 			$game.stats.each { |k,v| evs[k] = 0 }
-			ivs= {}
+			@ivs = {}
 			$game.stats.each { |k,v| ivs[k] = rng.rand(31) }
 			calculate_stats
-			hp= stats[:hp]
-			ot= $player.name
-			nature= $game.natures.values.sample
-			ability= species.abilities.sample
-			secret_id= rng.rand(65535)
+			@hp = stats[:hp]
+			@ot = $player.name
+			@nature = $game.natures.values.sample
+			@ability = species.abilities.sample
+			@secret_id = rng.rand(65535)
 		end
 
 		def applyEffect(ef)
-			ef.pokemon= self
-			effects << ef if !effects.include?(ef)
+			ef.pokemon = self
+			@effects << ef if !effects.include?(ef)
 			ef.activate # activating here ensures that effect doesn't start until it has a pokemon
 		end
 
 		def setStatus(st)
-			status= st if !status
+			@status = st if !@status
 		end
 
 		def clearStatus
-			effects.delete(status.effect)
-			status= nil
+			@effects.delete(@status.effect)
+			@status = nil
 		end
 
 		def damage(power)
@@ -128,11 +128,11 @@ module PKMN
 		end
 
 		def reduceHP(amount)
-			hp= hp - amount
+			@hp = @hp - amount
 		end
 
 		def reduceHPPercent(percent)
-			hp= stats[:hp] * (percent / 100)
+			@hp = @stats[:hp] * (percent / 100)
 		end
 
 		private :id=
