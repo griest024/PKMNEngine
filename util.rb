@@ -1,5 +1,23 @@
 module PKMN::Util
 
+	module DataClass
+
+		module InstanceMethods
+
+			def to_sym
+				self.instance_variable_get(:@type)
+			end
+		end
+		
+		def self.extended(klass)
+			$data_classes << klass
+			klass.instance_variable_set(:@type, klass.to_s.downcase.to_sym)
+			class << klass
+				include DataClass::InstanceMethods
+			end
+		end
+	end
+
 	# responsible for storing and notifying classes that want to respond to a certain event
 	module Callback
 		@callbacks = {}
@@ -7,11 +25,11 @@ module PKMN::Util
 		# name - the name of the callback
 		# system_event - the optional system event this callback will listen for
 		# call_method - a block to define a custom callback method
-		def self.newCallback(name, system_event = nil, &callback_method)
+		def self.new(name, system_event = nil, &callback_method)
 			name = name.to_sym
 			mod = Module.new do
 				@receivers = []
-				call_method = lambda { raise NotImplementedError.new("You must override ##{name}") } if !call_method
+				call_method = lambda { raise NotImplementedError.new("You must override ##{name}") } unless callback_method
 				define_method(name, callback_method)
 				def self.trigger
 					@receivers.each { |e| e.callback }
