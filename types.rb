@@ -5,13 +5,13 @@ module PKMN::Type
 
 		attr_accessor :id
 		attr_accessor :name
-		attr_accessor :class
+		attr_accessor :type_class
 		attr_accessor :effects
 
 		def initialize(id, name, type_class, effects = {})
 			@id = id
 			@name = name
-			@class = type_class
+			@type_class = type_class
 			@effects = effects
 		end
 		
